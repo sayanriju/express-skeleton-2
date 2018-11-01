@@ -1,0 +1,51 @@
+{
+  "name": "express-skeleton-2",
+  "version": "2.0.0",
+  "description": "A starter template for Express JS apps, with sane defaults",
+  "main": "bin/www",
+  "author": "Sayan \"Riju\" Chakrabarti <s26c.sayan@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "npm run start",
+    "serve": "nodemon ./bin/www",
+    "lint": "npm run lint:quiet",
+    "lint:quiet": "eslint --quiet './**/*.js'",
+    "lint:all": "eslint './**/*.js'",
+    "lint:fix": "eslint './**/*.js' --quiet --fix",
+    "prepush": "npm run lint:quiet"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.4",
+    "cuid": "^2.1.4",
+    "debug": "^2.6.9",
+    "ejs": "^2.5.9",
+    "email-templates": "^5.0.2",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "helmet": "^3.14.0",
+    "http-errors": "~1.6.2",
+    "jsonwebtoken": "^8.3.0",
+    "lodash": "^4.17.11",
+    "moment": "^2.22.2",
+    "mongoose": "^5.3.8",
+    "morgan": "^1.9.1",
+    "multer": "^1.4.1",
+    "randomstring": "^1.1.5",
+    "serve-favicon": "^2.5.0",
+    "tinyurl": "^1.1.2"
+  },
+  "eslintIgnore": [
+    "public/",
+    "bin/"
+  ],
+  "devDependencies": {
+    "eslint": "^5.8.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "husky": "^1.1.2",
+    "nodemon": "^1.18.5"
+  }
+}
