@@ -6,7 +6,7 @@
   "author": "Sayan \"Riju\" Chakrabarti <s26c.sayan@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "npm run start",
+    "start": "npm run serve",
     "serve": "nodemon ./bin/www",
     "lint": "npm run lint:quiet",
     "lint:quiet": "eslint --quiet './**/*.js'",
@@ -24,6 +24,7 @@
     "ejs": "^2.5.9",
     "email-templates": "^5.0.2",
     "express": "^4.16.4",
+    "express-jwt": "^5.3.1",
     "express-session": "^1.15.6",
     "helmet": "^3.14.0",
     "http-errors": "~1.6.2",
