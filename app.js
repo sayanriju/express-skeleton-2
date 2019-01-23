@@ -1,5 +1,6 @@
 const createError = require("http-errors")
 const express = require("express")
+const mongoose = require("mongoose")
 const path = require("path")
 const cookieParser = require("cookie-parser")
 const logger = require("morgan")
@@ -11,6 +12,10 @@ const restRoutes = require("./routes/rest")
 // const webRoutes = require("./routes/web")
 
 const app = express()
+
+// Database setup
+mongoose.Promise = global.Promise
+mongoose.connect(config.database, { useNewUrlParser: true })
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"))
