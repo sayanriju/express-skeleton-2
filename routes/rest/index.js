@@ -12,7 +12,7 @@ const users = require("./users")
 // router.all("*", checkJwt) // use this auth middleware for ALL subsequent routes
 
 router.get("/users", users.find)
-router.get("/users/:id", users.get)
+router.get("/user/:id", users.get)
 router.post("/user", users.post)
 router.put("/user/:id", users.put)
 router.delete("/user/:id", users.delete)

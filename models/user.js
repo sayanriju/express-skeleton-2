@@ -13,8 +13,7 @@ const UserSchema = new mongoose.Schema({
   },
 
   phone: {
-    type: String,
-    required: true
+    type: String
   },
 
   password: {
@@ -77,8 +76,13 @@ UserSchema.methods.comparePassword = function (pw) {
 }
 
 UserSchema.virtual("name.full").get(function () {
-  const last = (this.name.last === undefined || this.name.last === null) ? "" : this.name.last
-  return `${this.name.first} ${last}`
+  const first = (this.name.first === undefined || this.name.first === null)
+    ? ""
+    : this.name.first
+  const last = (this.name.last === undefined || this.name.last === null)
+    ? ""
+    : ` ${this.name.last}`
+  return `${first}${last}`
 })
 UserSchema.virtual("name.full").set(function (v) {
   this.name.first = v.substr(0, v.indexOf(" "))
