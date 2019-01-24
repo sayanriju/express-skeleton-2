@@ -8,9 +8,11 @@ const config = require("../../config")[process.env.NODE_ENV || "development"]
 const checkJwt = expressJwt({ secret: config.secret }) // the JWT auth check middleware
 
 const login = require("./auth")
+const signup = require("./auth/signup")
 const users = require("./users")
 
 router.post("/login", login.post) // UNAUTHENTICATED
+router.post("/signup", signup.post) // UNAUTHENTICATED
 
 // router.all("*", checkJwt) // use this auth middleware for ALL subsequent routes
 
