@@ -9,7 +9,7 @@ require("dotenv").config()
 const config = require("./config")[process.env.NODE_ENV || "development"]
 
 const restRoutes = require("./routes/rest")
-// const webRoutes = require("./routes/web")
+const webRoutes = require("./routes/web")
 
 const app = express()
 
@@ -27,7 +27,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, "public")))
 
-// app.use("/", webRoutes)
+app.use("/", webRoutes)
 app.use(`/api/v${config.apiVersion}`, restRoutes)
 
 // catch 404 and forward to error handler

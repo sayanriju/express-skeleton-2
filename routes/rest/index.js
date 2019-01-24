@@ -9,12 +9,15 @@ const checkJwt = expressJwt({ secret: config.secret }) // the JWT auth check mid
 
 const login = require("./auth")
 const signup = require("./auth/signup")
+const forgotpassword = require("./auth/password")
 const users = require("./users")
 
 router.post("/login", login.post) // UNAUTHENTICATED
 router.post("/signup", signup.post) // UNAUTHENTICATED
+router.post("/forgotpassword", forgotpassword.startWorkflow) // UNAUTHENTICATED; AJAX
+router.post("/resetpassword", forgotpassword.resetPassword) // UNAUTHENTICATED; AJAX
 
-// router.all("*", checkJwt) // use this auth middleware for ALL subsequent routes
+router.all("*", checkJwt) // use this auth middleware for ALL subsequent routes
 
 router.get("/users", users.find)
 router.get("/user/:id", users.get)
