@@ -1,5 +1,5 @@
-const express = require("express");
-const router = express.Router();
+const express = require("express")
+const router = express.Router()
 
 const User = require("../../models/user")
 
@@ -22,6 +22,6 @@ router.get("/resetpassword/:token", async (req, res) => {
   } catch (error) {
     return res.status(500).send(error.message)
   }
-});
+})
 
-module.exports = router;
+module.exports = router
