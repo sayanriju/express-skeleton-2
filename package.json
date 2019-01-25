@@ -2,6 +2,7 @@
   "name": "express-skeleton-2",
   "version": "2.0.0",
   "description": "A starter template for Express JS apps, with sane defaults",
+  "engines" : { "node" : ">=8" },
   "main": "bin/www",
   "author": "Sayan \"Riju\" Chakrabarti <s26c.sayan@gmail.com>",
   "license": "MIT",
@@ -44,6 +45,7 @@
     "bin/"
   ],
   "devDependencies": {
+    "apidoc": "^0.17.7",
     "eslint": "^5.8.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
