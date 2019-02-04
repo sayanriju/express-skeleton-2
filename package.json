@@ -2,7 +2,9 @@
   "name": "express-skeleton-2",
   "version": "2.0.0",
   "description": "A starter template for Express JS apps, with sane defaults",
-  "engines" : { "node" : ">=8" },
+  "engines": {
+    "node": ">=10"
+  },
   "main": "bin/www",
   "author": "Sayan \"Riju\" Chakrabarti <s26c.sayan@gmail.com>",
   "license": "MIT",
@@ -13,7 +15,8 @@
     "lint:quiet": "eslint --quiet './**/*.js'",
     "lint:all": "eslint './**/*.js'",
     "lint:fix": "eslint './**/*.js' --quiet --fix",
-    "prepush": "npm run lint:quiet"
+    "prepush": "npm run lint:quiet",
+    "test": "ava"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
@@ -33,9 +36,11 @@
     "jsonwebtoken": "^8.3.0",
     "lodash": "^4.17.11",
     "moment": "^2.22.2",
+    "mongodb-memory-server": "^3.0.0",
     "mongoose": "^5.3.8",
     "morgan": "^1.9.1",
     "multer": "^1.4.1",
+    "node-mocks-http": "^1.7.3",
     "randomstring": "^1.1.5",
     "serve-favicon": "^2.5.0",
     "tinyurl": "^1.1.2"
@@ -46,9 +51,11 @@
   ],
   "devDependencies": {
     "apidoc": "^0.17.7",
+    "ava": "^1.1.0",
     "eslint": "^5.8.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
+    "faker": "^4.1.0",
     "husky": "^1.1.2",
     "nodemon": "^1.18.9"
   }
