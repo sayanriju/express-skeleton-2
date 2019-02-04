@@ -16,7 +16,9 @@
     "lint:all": "eslint './**/*.js'",
     "lint:fix": "eslint './**/*.js' --quiet --fix",
     "prepush": "npm run lint:quiet",
-    "test": "ava"
+    "test:nocoverage": "ava",
+    "test:withcoverage": "nyc ava",
+    "test": "npm run test:withcoverage"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
@@ -57,6 +59,7 @@
     "eslint-plugin-import": "^2.14.0",
     "faker": "^4.1.0",
     "husky": "^1.1.2",
-    "nodemon": "^1.18.9"
+    "nodemon": "^1.18.9",
+    "nyc": "^13.1.0"
   }
 }

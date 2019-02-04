@@ -1,0 +1,18 @@
+{
+  "check-coverage": true,
+  "lines": 75,
+  "statements": 75,
+  "functions": 75,
+  "branches": 75,
+  "include": [
+    "routes/**/*.js",
+    "lib/**/*.js"
+  ],
+  "reporter": [
+    "text-summary",
+    "html"
+  ],
+  "cache": true,
+  "all": true,
+  "report-dir": "./public/coverage"
+}
