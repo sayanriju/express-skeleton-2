@@ -4,6 +4,8 @@ const mongoose = require("mongoose")
 const path = require("path")
 const cookieParser = require("cookie-parser")
 const logger = require("morgan")
+const cors = require("cors")
+const helmet = require("helmet")
 
 require("dotenv").config()
 const config = require("./config")[process.env.NODE_ENV || "development"]
@@ -12,6 +14,11 @@ const restRoutes = require("./routes/rest")
 const webRoutes = require("./routes/web")
 
 const app = express()
+
+if (process.env.NODE_ENV !== undefined && process.env.NODE_ENV !== "development") {
+  app.use(helmet())
+}
+app.use(cors())
 
 // Database setup
 mongoose.Promise = global.Promise
