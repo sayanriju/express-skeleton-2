@@ -29,14 +29,16 @@ module.exports = {
       } = req.body
       if (email === undefined) return res.status(400).json({ error: true, reason: "Missing manadatory field `email`" })
       if (password === undefined) return res.status(400).json({ error: true, reason: "Missing manadatory field `password`" })
-      const user = await User.create({
+      let user = await User.create({
         email,
         phone,
         password,
         isActive,
         name
       })
+      user = user.toObject()
       delete user.password
+      delete user.forgotpassword
       return res.json({ error: false, user })
     } catch (err) {
       return res.status(500).json({ error: true, reason: err.message })
@@ -58,8 +60,11 @@ module.exports = {
       // if (name !== undefined && (name.first !== undefined || name.last !== undefined)) user.name = {}
       if (name !== undefined && name.first !== undefined) user.name.first = name.first
       if (name !== undefined && name.last !== undefined) user.name.last = name.last
-      await user.save()
-      return res.json({ error: false, user })
+      let updatedUser = await user.save()
+      updatedUser = updatedUser.toObject()
+      delete updatedUser.password
+      delete updatedUser.forgotpassword
+      return res.json({ error: false, user: updatedUser })
     } catch (err) {
       return res.status(500).json({ error: true, reason: err.message })
     }
