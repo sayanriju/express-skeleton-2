@@ -15,7 +15,6 @@
     "lint:quiet": "eslint --quiet './**/*.js'",
     "lint:all": "eslint './**/*.js'",
     "lint:fix": "eslint './**/*.js' --quiet --fix",
-    "prepush": "npm run lint:quiet",
     "test:nocoverage": "ava",
     "test:withcoverage": "nyc ava",
     "test": "npm run test:withcoverage"
@@ -61,5 +60,10 @@
     "husky": "^1.1.2",
     "nodemon": "^1.18.9",
     "nyc": "^13.1.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run lint:quiet"
+    }
   }
 }
