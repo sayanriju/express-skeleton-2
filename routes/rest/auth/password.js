@@ -46,7 +46,7 @@ module.exports = {
       // if (/(?=.*([\d]|[\@\!\#\$\%\^\&\*\-\_\+\\\.\,\;\=])).{8,}/.test(password) === false) { // eslint-disable-line no-useless-escape
       //   throw new Error("Password should have length of at least 8 with one special character or number!")
       // }
-      const user = await User.findOne({ "forgotpassword.token": token, email }).exec()
+      const user = await User.findOne({ "forgotpassword.token": token, "forgotpassword.expiresAt": { $gte: new Date() }, email }).exec()
       if (user === null) throw new Error("Invalid or Expired Token")
       // if (user === null) throw new Error("User not found, please check your email address and try again")
       if (!user.isActive) throw new Error("Oops, there is a problem with your account. Please contact admin")
