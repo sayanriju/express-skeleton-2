@@ -22,7 +22,10 @@ app.use(cors())
 
 // Database setup
 mongoose.Promise = global.Promise
-mongoose.connect(config.database, { useNewUrlParser: true })
+mongoose.connect(config.database, {
+  useNewUrlParser: true,
+  useCreateIndex: true
+})
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"))
