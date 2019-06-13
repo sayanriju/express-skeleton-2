@@ -38,7 +38,7 @@
     "lodash": "^4.17.11",
     "moment": "^2.22.2",
     "mongodb-memory-server": "^3.0.0",
-    "mongoose": "^5.3.8",
+    "mongoose": "^5.5.15",
     "morgan": "^1.9.1",
     "multer": "^1.4.1",
     "node-mocks-http": "^1.7.3",
