@@ -58,7 +58,7 @@
     "eslint-plugin-import": "^2.14.0",
     "faker": "^4.1.0",
     "husky": "^1.1.2",
-    "nodemon": "^1.18.9",
+    "nodemon": "^1.19.1",
     "nyc": "^13.1.0"
   },
   "husky": {
