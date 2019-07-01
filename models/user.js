@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-const bcrypt = require("bcrypt-nodejs")
+const bcrypt = require("bcrypt")
 const randomstring = require("randomstring")
 
 // const config = require('../config')[process.env.NODE_ENV || 'development'];
@@ -65,41 +65,27 @@ UserSchema.pre("validate", function (next) {
   return next()
 })
 
-// Save user's hashed password
-UserSchema.pre("save", function (next) {
+// Hash & save user's password:
+UserSchema.pre("save", async function (next) {
   const user = this
   if (this.isModified("password") || this.isNew) {
-    bcrypt.genSalt(10, (err, salt) => {
-      if (err) {
-        next(err)
-        return
-      }
-      bcrypt.hash(user.password, salt, null, (err1, hash) => {
-        if (err1) {
-          return next(err)
-        }
-        // saving actual password as hash
-        user.password = hash
-        return next()
-      })
-    })
-  } else {
-    next()
+    try {
+      user.password = await bcrypt.hash(user.password, process.env.SALT_ROUNDS || 10)
+    } catch (error) {
+      return next(error)
+    }
   }
+  return next()
 })
 
-// compare two passwords
-
-UserSchema.methods.comparePassword = function (pw) {
-  return new Promise((resolve, reject) => {
-    bcrypt.compare(pw, this.password, (err, isMatch) => {
-      if (err) {
-        return reject(err)
-      }
-      if (isMatch === false) return reject(new Error("Credential Mismatch!"))
-      return resolve("OK")
-    })
-  })
+// compare two passwords:
+UserSchema.methods.comparePassword = async function (pw) {
+  try {
+    const isMatch = await bcrypt.compare(pw, this.password)
+    if (isMatch === false) throw new Error("Credential Mismatch!")
+  } catch (error) {
+    throw error // rethrow
+  }
 }
 // eslint-disable-next-line prefer-arrow-callback
 UserSchema.post("save", function (doc) {
