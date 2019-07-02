@@ -1,6 +1,3 @@
-const randomstring = require("randomstring")
-const mailer = require("../../../lib/mail")
-
 const User = require("../../../models/user")
 
 module.exports = {
