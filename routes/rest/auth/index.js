@@ -3,12 +3,45 @@ const jwt = require("jsonwebtoken")
 const User = require("../../../models/user")
 
 module.exports = {
+  /**
+   *
+   * @api {post} /login User login
+   * @apiName userLogin
+   * @apiGroup Auth
+   * @apiVersion  1.0.0
+   * @apiPermission Public
+   *
+   *
+   * @apiParam  {String} handle (mobile / email)
+   * @apiParam  {String} password user's password
+   *
+   * @apiSuccess (200) {json} name description
+   *
+   * @apiParamExample  {json} Request-Example:
+   * {
+   *     "handle" : "myEmail@logic-square.com",
+   *     "password" : "myNewPassword"
+   * }
+   *
+   *
+   * @apiSuccessExample {json} Success-Response:
+   * {
+   *     "error" : false,
+   *     "handle" : "myEmail@logic-square.com",
+   *     "token": "authToken.abc.xyz"
+   * }
+   *
+   *
+   */
   async post(req, res) {
     try {
       // const { type } = req.params
       const { handle, password } = req.body
       if (handle === undefined || password === undefined) {
-        return res.status(400).json({ error: true, reason: "Fields `handle` and `password` are mandatory" })
+        return res.status(400).json({
+          error: true,
+          reason: "Fields `handle` and `password` are mandatory"
+        })
       }
       const user = await User.findOne({
         $or: [{ email: handle.toLowerCase() }, { phone: handle }]
@@ -23,7 +56,7 @@ module.exports = {
         _id: user._id,
         fullName: user.name.full,
         email: user.email,
-        phone: user.phone,
+        phone: user.phone
       }
       const token = jwt.sign(payload, process.env.SECRET, {
         expiresIn: 3600 * 24 * 30 // 1 month

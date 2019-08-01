@@ -1,34 +1,143 @@
 const User = require("../../models/user")
 
 module.exports = {
-
+  /**
+   *
+   * @api {get} /users User list
+   * @apiName userList
+   * @apiGroup user
+   * @apiVersion  1.0.0
+   * @apiPermission user
+   * @apiHeader {String} Authorization The JWT Token in format "Bearer xxxx.yyyy.zzzz"
+   *
+   *
+   * @apiSuccess (200) {json} name description
+   *
+   *
+   * @apiSuccessExample {type} Success-Response:
+   * {
+   *     "error" : false,
+   *     "users" : [{
+   *          "email" : "myEmail@logic-square.com",
+   *          "phone" : "00000000000",
+   *          "name"  :{
+   *                "first":"Jhon",
+   *                "last" :"Doe"
+   *      }]
+   * }
+   *
+   *
+   */
   async find(req, res) {
     try {
-      const users = await User.find({}).select("-password -forgotpassword").exec()
+      const users = await User.find({})
+        .select("-password -forgotpassword")
+        .exec()
       return res.json({ error: false, users })
     } catch (err) {
       return res.status(500).json({ error: true, reason: err.message })
     }
   },
+
+  /**
+   *
+   * @api {get} /user/:id User Details
+   * @apiName userDetails
+   * @apiGroup user
+   * @apiVersion  1.0.0
+   * @apiPermission user
+   * @apiHeader {String} Authorization The JWT Token in format "Bearer xxxx.yyyy.zzzz"
+   *
+   * @apiParam {String} id Users unique ID.
+   *
+   * @apiSuccess (200) {json} name description
+   *
+   *
+   * @apiSuccessExample {type} Success-Response:
+   * {
+   *     "error" : false,
+   *     "users" : [
+   *          "email" : "myEmail@logic-square.com",
+   *          "phone" : "00000000000",
+   *          "name"  :{
+   *                "first":"Jhon",
+   *                "last" :"Doe"
+   *      ]
+   * }
+   *
+   *
+   */
   async get(req, res) {
     try {
-      const user = await User.findOne({ _id: req.params.id }).select("-password -forgotpassword").exec()
+      const user = await User.findOne({ _id: req.params.id })
+        .select("-password -forgotpassword")
+        .exec()
       return res.json({ error: false, user })
     } catch (err) {
       return res.status(500).json({ error: true, reason: err.message })
     }
   },
+
+  /**
+   *
+   * @api {post} /user User manual instert
+   * @apiName userManualInsert
+   * @apiGroup user
+   * @apiVersion  1.0.0
+   * @apiHeader {String} Authorization The JWT Token in format "Bearer xxxx.yyyy.zzzz"
+   *
+   *
+   * @apiParam  {String} email
+   * @apiParam  {String} phone
+   * @apiParam  {Object} name
+   * @apiParam  {String} password
+   *
+   * @apiSuccess (200) {json} name description
+   *
+   * @apiParamExample  {json} Request-Example:
+   * {
+   *     "email" : "myEmail@logic-square.com",
+   *     "phone" : "00000000000",
+   *     "name"  :{
+   *          "first":"Jhon",
+   *          "last" :"Doe"
+   *      },
+   *      "isActive" : true
+   * }
+   *
+   *
+   * @apiSuccessExample {json} Success-Response:
+   * {
+   *     "error" : false,
+   *     "user" : {
+   *          "email" : "myEmail@logic-square.com",
+   *          "phone" : "00000000000",
+   *          "name"  :{
+   *              "first":"Jhon",
+   *              "last" :"Doe"
+   *           },
+   *          "isActive" : true,
+   *          "password" : "myPass"
+   *      }
+   * }
+   *
+   *
+   */
   async post(req, res) {
     try {
       const {
-        email,
-        phone,
-        password,
-        isActive,
-        name
+        email, phone, password, isActive, name
       } = req.body
-      if (email === undefined) return res.status(400).json({ error: true, reason: "Missing manadatory field `email`" })
-      if (password === undefined) return res.status(400).json({ error: true, reason: "Missing manadatory field `password`" })
+      if (email === undefined) {
+        return res
+          .status(400)
+          .json({ error: true, reason: "Missing manadatory field `email`" })
+      }
+      if (password === undefined) {
+        return res
+          .status(400)
+          .json({ error: true, reason: "Missing manadatory field `password`" })
+      }
       let user = await User.create({
         email,
         phone,
@@ -44,13 +153,53 @@ module.exports = {
       return res.status(500).json({ error: true, reason: err.message })
     }
   },
+
+  /**
+   *
+   * @api {put} /user/:id User update, one or multiple fields
+   * @apiName userUpdate
+   * @apiGroup user
+   * @apiVersion  1.0.0
+   * @apiHeader {String} Authorization The JWT Token in format "Bearer xxxx.yyyy.zzzz"
+   *
+   *
+   * @apiParam {String} id Users unique ID.
+   *
+   * @apiSuccess (200) {json} name description
+   *
+   * @apiParamExample  {json} Request-Example:
+   * {
+   *     "email" : "myEmail@logic-square.com",
+   *     "phone" : "00000000000",
+   *     "name"  :{
+   *          "first":"Jhon",
+   *          "last" :"Doe"
+   *      },
+   *      "isActive" : true
+   * }
+   *
+   *
+   * @apiSuccessExample {json} Success-Response:
+   * {
+   *     "error" : false,
+   *     "user" : {
+   *          "email" : "myEmail@logic-square.com",
+   *          "phone" : "00000000000",
+   *          "name"  :{
+   *              "first":"Jhon",
+   *              "last" :"Doe"
+   *           },
+   *          "isActive" : true,
+   *          "password" : "myPass"
+   *      }
+   * }
+   *
+   *
+   */
   async put(req, res) {
     try {
       const {
-        phone,
-        password,
-        isActive,
-        name
+        phone, password, isActive, name
       } = req.body
       const user = await User.findOne({ _id: req.params.id }).exec()
       if (user === null) return res.status(400).json({ error: true, reason: "No such User!" })
@@ -69,6 +218,27 @@ module.exports = {
       return res.status(500).json({ error: true, reason: err.message })
     }
   },
+
+  /**
+   *
+   * @api {delete} /user/:id User delete
+   * @apiName userDelete
+   * @apiGroup user
+   * @apiVersion  1.0.0
+   * @apiHeader {String} Authorization The JWT Token in format "Bearer xxxx.yyyy.zzzz"
+   *
+   *
+   * @apiParam {String} id Users unique ID.
+   *
+   * @apiSuccess (200) {json} name description
+   *
+   * @apiSuccessExample {json} Success-Response:
+   * {
+   *     "error" : false
+   * }
+   *
+   *
+   */
   async delete(req, res) {
     try {
       await User.deleteOne({ _id: req.params.id })
@@ -77,5 +247,4 @@ module.exports = {
       return res.status(500).json({ error: true, reason: err.message })
     }
   }
-
 }
