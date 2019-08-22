@@ -3,9 +3,7 @@ const router = express.Router()
 
 const expressJwt = require("express-jwt")
 
-const config = require("../../config")[process.env.NODE_ENV || "development"]
-
-const checkJwt = expressJwt({ secret: config.secret }) // the JWT auth check middleware
+const checkJwt = expressJwt({ secret: process.env.SECRET }) // the JWT auth check middleware
 
 const login = require("./auth")
 const signup = require("./auth/signup")

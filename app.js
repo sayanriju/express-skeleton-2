@@ -8,7 +8,6 @@ const cors = require("cors")
 const helmet = require("helmet")
 
 require("dotenv").config()
-const config = require("./config")[process.env.NODE_ENV || "development"]
 
 const restRoutes = require("./routes/rest")
 const webRoutes = require("./routes/web")
@@ -22,7 +21,7 @@ app.use(cors())
 
 // Database setup
 mongoose.Promise = global.Promise
-mongoose.connect(config.database, {
+mongoose.connect(process.env.MONGODB_CONNECTION_STRING, {
   useNewUrlParser: true,
   useCreateIndex: true
 })
@@ -38,7 +37,7 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, "public")))
 
 app.use("/", webRoutes)
-app.use(`/api/v${config.apiVersion}`, restRoutes)
+app.use(`/api/v${process.env.API_VERSION}`, restRoutes)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

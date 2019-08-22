@@ -2,7 +2,6 @@ const mongoose = require("mongoose")
 const bcrypt = require("bcrypt")
 const randomstring = require("randomstring")
 
-// const config = require('../config')[process.env.NODE_ENV || 'development'];
 const mailer = require("../lib/mail")
 
 const UserSchema = new mongoose.Schema({
