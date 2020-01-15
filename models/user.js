@@ -69,7 +69,7 @@ UserSchema.pre("save", async function (next) {
   const user = this
   if (this.isModified("password") || this.isNew) {
     try {
-      user.password = await bcrypt.hash(user.password, process.env.SALT_ROUNDS || 10)
+      user.password = await bcrypt.hash(user.password, +process.env.SALT_ROUNDS || 10)
     } catch (error) {
       return next(error)
     }
