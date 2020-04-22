@@ -23,7 +23,8 @@ app.use(cors())
 mongoose.Promise = global.Promise
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING, {
   useNewUrlParser: true,
-  useCreateIndex: true
+  useCreateIndex: true,
+  useUnifiedTopology: true
 })
 
 // view engine setup
