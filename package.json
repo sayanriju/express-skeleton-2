@@ -5,6 +5,10 @@
   "engines": {
     "node": ">=10"
   },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sayanriju/express-skeleton-2"
+  },
   "main": "bin/www",
   "author": "Sayan \"Riju\" Chakrabarti <s26c.sayan@gmail.com>",
   "license": "MIT",
@@ -53,10 +57,10 @@
   ],
   "devDependencies": {
     "apidoc": "^0.17.7",
-    "ava": "^2.2.0",
+    "ava": "^2.4.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.2.0",
-    "eslint-plugin-import": "^2.18.1",
+    "eslint-plugin-import": "^2.20.2",
     "faker": "^4.1.0",
     "husky": "^1.3.1",
     "nodemon": "^2.0.3",
