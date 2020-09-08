@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "A starter template for Express JS apps, with sane defaults",
   "engines": {
-    "node": ">=10"
+    "node": ">=12"
   },
   "repository": {
     "type": "git",
@@ -15,6 +15,7 @@
   "scripts": {
     "start": "npm run serve",
     "serve": "nodemon ./bin/www",
+    "debug": "nodemon --inspect ./bin/www",
     "lint": "npm run lint:quiet",
     "lint:quiet": "eslint --quiet './**/*.js'",
     "lint:all": "eslint './**/*.js'",
@@ -25,7 +26,7 @@
     "gendoc": "apidoc -i routes/ -o public/docs"
   },
   "dependencies": {
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
@@ -37,19 +38,19 @@
     "express": "^4.17.1",
     "express-jwt": "^5.3.1",
     "express-session": "^1.16.2",
-    "helmet": "^3.19.0",
+    "helmet": "^3.23.3",
     "http-errors": "~1.6.2",
     "jsonwebtoken": "^8.5.1",
-    "lodash": "^4.17.15",
-    "moment": "^2.24.0",
+    "lodash": "^4.17.20",
+    "moment": "^2.27.0",
     "mongodb-memory-server": "^3.1.3",
-    "mongoose": "^5.7.5",
+    "mongoose": "^5.10.3",
     "morgan": "^1.9.1",
     "multer": "^1.4.2",
-    "node-mocks-http": "^1.7.6",
+    "node-mocks-http": "^1.9.0",
     "randomstring": "^1.1.5",
     "serve-favicon": "^2.5.0",
-    "tinyurl": "^1.1.4"
+    "tinyurl": "^1.1.7"
   },
   "eslintIgnore": [
     "public/",
@@ -57,13 +58,13 @@
   ],
   "devDependencies": {
     "apidoc": "^0.17.7",
-    "ava": "^2.4.0",
+    "ava": "^3.12.1",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.2.0",
-    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-import": "^2.22.0",
     "faker": "^4.1.0",
     "husky": "^1.3.1",
-    "nodemon": "^2.0.3",
+    "nodemon": "^2.0.4",
     "nyc": "^14.1.1"
   },
   "husky": {
