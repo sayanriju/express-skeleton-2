@@ -19,12 +19,34 @@ const UserSchema = new mongoose.Schema({
 
   password: {
     type: String,
-    required: true
+    required() {
+      return this.accountType === "email"
+    }
+  },
+
+  accountType: {
+    type: String,
+    enum: ["fb", "google", "email"],
+    default: "email"
   },
 
   isActive: {
     type: Boolean,
     default: true
+  },
+
+  facebookId: {
+    type: String,
+    required() {
+      return this.accountType === "fb"
+    }
+  },
+
+  googleId: {
+    type: String,
+    required() {
+      return this.accountType === "google"
+    }
   },
 
   name: {
@@ -88,7 +110,7 @@ UserSchema.methods.comparePassword = async function (pw) {
 }
 // eslint-disable-next-line prefer-arrow-callback
 UserSchema.post("save", function (doc) {
-  if (doc.generatedPassword !== undefined) {
+  if (doc.generatedPassword !== undefined && doc.accountType === "email") {
     // Send welcome email, but NO WAITING!
     mailer("welcome", {
       to: doc.email,
