@@ -7,11 +7,14 @@ const checkJwt = expressJwt({ secret: process.env.SECRET }) // the JWT auth chec
 
 const login = require("./auth")
 const signup = require("./auth/signup")
+const social = require("./auth/social")
 const forgotpassword = require("./auth/password")
 const users = require("./users")
 
 router.post("/login", login.post) // UNAUTHENTICATED
 router.post("/signup", signup.post) // UNAUTHENTICATED
+router.post("/facebook", social.authFb) // UNAUTHENTICATED
+router.post("/google", social.authGoogle) // UNAUTHENTICATED
 router.post("/forgotpassword", forgotpassword.startWorkflow) // UNAUTHENTICATED; AJAX
 router.post("/resetpassword", forgotpassword.resetPassword) // UNAUTHENTICATED; AJAX
 

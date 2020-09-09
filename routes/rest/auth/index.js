@@ -48,6 +48,7 @@ module.exports = {
       }).exec()
       if (user === null) throw new Error("User Not Found")
       if (user.isActive === false) throw new Error("User Inactive")
+      if (user.accountType !== "email") throw new Error("Try login using social signin")
       // check pass
       await user.comparePassword(password)
       // No error, send jwt
