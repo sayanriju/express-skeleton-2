@@ -1,9 +1,9 @@
 const express = require("express")
 const router = express.Router()
 
-const expressJwt = require("express-jwt")
+const { expressjwt } = require("express-jwt")
 
-const checkJwt = expressJwt({ secret: process.env.SECRET }) // the JWT auth check middleware
+const checkJwt = expressjwt({ secret: process.env.SECRET, algorithms: ["HS256"] }) // the JWT auth check middleware
 
 const login = require("./auth")
 const signup = require("./auth/signup")
