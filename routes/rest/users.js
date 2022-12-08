@@ -3,9 +3,9 @@ const User = require("../../models/user")
 module.exports = {
   /**
    *
-   * @api {get} /users User list
+   * @api {get} /users List all Users
    * @apiName userList
-   * @apiGroup user
+   * @apiGroup User
    * @apiVersion  1.0.0
    * @apiPermission User
    * @apiHeader {String} Authorization The JWT Token in format "Bearer xxxx.yyyy.zzzz"
@@ -41,9 +41,9 @@ module.exports = {
 
   /**
    *
-   * @api {get} /user/:id User Details
+   * @api {get} /user/:id Get single User details by ID
    * @apiName userDetails
-   * @apiGroup user
+   * @apiGroup User
    * @apiVersion  1.0.0
    * @apiPermission User
    * @apiHeader {String} Authorization The JWT Token in format "Bearer xxxx.yyyy.zzzz"
@@ -80,17 +80,17 @@ module.exports = {
 
   /**
    *
-   * @api {post} /user User manual instert
+   * @api {post} /user Add new User
    * @apiName userManualInsert
-   * @apiGroup user
+   * @apiGroup User
    * @apiVersion  1.0.0
    * @apiHeader {String} Authorization The JWT Token in format "Bearer xxxx.yyyy.zzzz"
    *
    *
-   * @apiParam  {String} email
-   * @apiParam  {String} phone
-   * @apiParam  {Object} name
-   * @apiParam  {String} password
+   * @apiBody {String} email
+   * @apiBody {String} phone
+   * @apiBody {Object} name
+   * @apiBody {String} password
    *
    * @apiSuccess (200) {json} name description
    *
@@ -156,9 +156,9 @@ module.exports = {
 
   /**
    *
-   * @api {put} /user/:id User update, one or multiple fields
+   * @api {put} /user/:id Edit User details
    * @apiName userUpdate
-   * @apiGroup user
+   * @apiGroup User
    * @apiVersion  1.0.0
    * @apiHeader {String} Authorization The JWT Token in format "Bearer xxxx.yyyy.zzzz"
    *
@@ -221,9 +221,9 @@ module.exports = {
 
   /**
    *
-   * @api {delete} /user/:id User delete
+   * @api {delete} /user/:id Delete a User
    * @apiName userDelete
-   * @apiGroup user
+   * @apiGroup User
    * @apiVersion  1.0.0
    * @apiHeader {String} Authorization The JWT Token in format "Bearer xxxx.yyyy.zzzz"
    *

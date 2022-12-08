@@ -66,3 +66,6 @@ typings/
 *.swap
 .vscode/
 tempCodeRunnerFile.javascript
+
+public/docs/*
+^public/docs/.gitkeep

@@ -12,8 +12,8 @@ module.exports = {
    * @apiPermission Public
    *
    *
-   * @apiParam  {String} handle (mobile / email)
-   * @apiParam  {String} password user's password
+   * @apiBody  {String} handle (mobile / email)
+   * @apiBody  {String} password user's password
    *
    * @apiSuccess (200) {json} name description
    *

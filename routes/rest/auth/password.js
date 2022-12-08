@@ -15,7 +15,7 @@ module.exports = {
    * @apiPermission Public
    *
    *
-   * @apiParam  {String} handle (email)
+   * @apiBody  {String} handle (email)
    *
    * @apiSuccess (200) {json} name description
    *
@@ -85,12 +85,11 @@ module.exports = {
    * @apiName resetPassword
    * @apiGroup Auth
    * @apiVersion  1.0.0
-   * @apiPermission Public
+   * @apiPermission Public   *
    *
-   *
-   * @apiParam  {String} token
-   * @apiParam  {String} password
-   * @apiParam  {String} email
+   * @apiBody  {String} token
+   * @apiBody  {String} password
+   * @apiBody  {String} email
    *
    * @apiSuccess (200) {json} name description
    *

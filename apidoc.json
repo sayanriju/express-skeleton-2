@@ -1,0 +1,10 @@
+{
+  "name": "express-skeleton-2",
+  "version": "2.1.0",
+  "description": "A starter template for Express JS apps, with sane defaults",
+  "title": "Express Skeleton 2",
+  "url": "https://github.com/sayanriju/express-skeleton-2",
+  "order": [
+    
+  ]
+}
