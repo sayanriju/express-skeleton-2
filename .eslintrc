@@ -4,7 +4,8 @@
     "node": true,
     "mocha": true
   },
-  "extends": "airbnb-base",
+  "extends": ["airbnb-base", "plugin:import/recommended"],
+  "plugins": ["eslint-plugin-import"],
   "rules": {
     "func-names": [
       "error",
@@ -40,6 +41,7 @@
     "eol-last": 1,
     "padded-blocks": 1,
     "import/newline-after-import": 0,
+    "import/no-unresolved": 0,
     "no-underscore-dangle": 0
   }
 }
