@@ -40,7 +40,7 @@
     "express-session": "^1.16.2",
     "helmet": "^3.23.3",
     "http-errors": "~1.6.2",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "lodash": "^4.17.20",
     "moment": "^2.27.0",
     "mongodb-memory-server": "^3.1.3",
