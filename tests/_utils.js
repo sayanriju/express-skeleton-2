@@ -1,17 +1,18 @@
-const MongodbMemoryServer = require("mongodb-memory-server").default
 const mongoose = require("mongoose")
-
+const { MongoMemoryServer } = require("mongodb-memory-server")
 const httpMocks = require("node-mocks-http")
 
-const mongod = new MongodbMemoryServer()
+let mongod
+mongoose.set("strictQuery", true)
 
 module.exports = {
   async beforeHookMongo(t) {
-    mongoose.connect(await mongod.getConnectionString(), { useNewUrlParser: true })
+    mongod = await MongoMemoryServer.create()
+    await mongoose.connect(await mongod.getUri())
   },
   async afterHookMongo(t) {
-    mongoose.disconnect()
-    mongod.stop()
+    await mongoose.disconnect()
+    await mongod.stop()
   },
   async runRouteHandler(fn, req = {}) {
     const request = httpMocks.createRequest({

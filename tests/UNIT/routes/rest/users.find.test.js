@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import test from "ava"
+const test = require("ava")
 const faker = require("faker")
 
 const { runRouteHandler, beforeHookMongo, afterHookMongo } = require("../../../_utils")
@@ -30,7 +30,7 @@ test.serial("my passing test", async (t) => {
   t.is(body.users.length, 5)
 })
 
-test.serial("my passing test 2", async (t) => {
+test.serial("my second test (may pass or fail!)", async (t) => {
   const { status, body } = await runRouteHandler(find)
   t.is(status, 200)
   t.is(body.users[0].email, t.context.fixture[0].email.toLowerCase())
