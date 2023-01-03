@@ -53,7 +53,6 @@ const UserSchema = new mongoose.Schema({
 
 })
 
-
 UserSchema.pre("validate", function (next) {
   if (this.isNew) {
     if (this.password === undefined || this.password === null) {
@@ -79,12 +78,8 @@ UserSchema.pre("save", async function (next) {
 
 // compare two passwords:
 UserSchema.methods.comparePassword = async function (pw) {
-  try {
-    const isMatch = await bcrypt.compare(pw, this.password)
-    if (isMatch === false) throw new Error("Credential Mismatch!")
-  } catch (error) {
-    throw error // rethrow
-  }
+  const isMatch = await bcrypt.compare(pw, this.password)
+  if (isMatch === false) throw new Error("Credential Mismatch!")
 }
 // eslint-disable-next-line prefer-arrow-callback
 UserSchema.post("save", function (doc) {
@@ -114,6 +109,5 @@ UserSchema.virtual("name.full").set(function (v) {
 
 UserSchema.set("toJSON", { virtuals: true })
 UserSchema.set("toObject", { virtuals: true })
-
 
 module.exports = mongoose.model("User", UserSchema)

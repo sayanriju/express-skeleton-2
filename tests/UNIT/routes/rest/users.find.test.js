@@ -9,11 +9,10 @@ const { find } = require("../../../../routes/rest/users") // function to unit te
 test.before(beforeHookMongo)
 test.after.always(afterHookMongo)
 
-
 test.beforeEach(async (t) => {
   // fixture data set:
   faker.seed(123)
-  const fixture = Array(5).fill().map(x => ({
+  const fixture = Array(5).fill().map((x) => ({
     email: faker.internet.email(),
     name: faker.name.findName(),
     password: faker.internet.password

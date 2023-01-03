@@ -1,13 +1,14 @@
 const createError = require("http-errors")
 const express = require("express")
-const mongoose = require("mongoose")
 const path = require("path")
 const cookieParser = require("cookie-parser")
-const logger = require("morgan")
+const morgan = require("morgan")
 const cors = require("cors")
 const helmet = require("helmet")
 
 require("dotenv").config()
+
+const logger = require("./lib/logger")
 
 const restRoutes = require("./routes/rest")
 const webRoutes = require("./routes/web")
@@ -19,23 +20,16 @@ if (process.env.NODE_ENV !== undefined && process.env.NODE_ENV !== "development"
 }
 app.use(cors())
 
-// Database setup
-mongoose.Promise = global.Promise
-mongoose.connect(process.env.MONGODB_CONNECTION_STRING, {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useUnifiedTopology: true
-})
-
 // view engine setup
 app.set("views", path.join(__dirname, "views"))
 app.set("view engine", "ejs")
 
-app.use(logger("dev"))
+app.use(morgan("dev"))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, "public")))
+app.use((req, res, next) => { req.logger = logger; return next() })
 
 app.use("/", webRoutes)
 app.use(`/api/v${process.env.API_VERSION}`, restRoutes)
