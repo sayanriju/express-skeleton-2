@@ -52,8 +52,7 @@
     "pino": "^8.8.0",
     "pino-pretty": "^9.1.1",
     "randomstring": "^1.1.5",
-    "serve-favicon": "^2.5.0",
-    "tinyurl": "^1.1.7"
+    "serve-favicon": "^2.5.0"
   },
   "eslintIgnore": [
     "public/"
