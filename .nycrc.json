@@ -14,5 +14,5 @@
   ],
   "cache": true,
   "all": true,
-  "report-dir": "./public/coverage"
+  "report-dir": "./coverage"
 }
