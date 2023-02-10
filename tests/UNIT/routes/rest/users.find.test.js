@@ -31,13 +31,17 @@ test.serial("Users.find: my passing test", async (t) => {
   t.is(body.users.length, 5)
 })
 
-test.serial("Users.find: my second test (may pass or fail!)", async (t) => {
+test.serial("Users.find: my second passing test", async (t) => {
   const { status, body } = await runRouteHandler(find)
   t.is(status, 200)
-  t.is(body.users[0].email, t.context.fixture[0].email.toLowerCase())
+  const givenEmails = t.context.fixture.map(({ email }) => email.toLowerCase())
+  const returnedEmails = body.users.map(({ email }) => email.toLowerCase())
+  const usersMatch = givenEmails.length === returnedEmails.length
+    && returnedEmails.every((email) => givenEmails.includes(email))
+  t.true(usersMatch)
 })
 
-test.only("Users.find: If DB ops throw an error, status should be 500", async (t) => {
+test.serial("Users.find: If DB ops throw an error, status should be 500", async (t) => {
   sinon.stub(User, "find").throws(new Error("Dummy DB Error!!"))
   const { status, body } = await runRouteHandler(find)
   t.is(status, 500)
