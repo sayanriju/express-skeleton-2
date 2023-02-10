@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 const test = require("ava")
 const faker = require("faker")
+const sinon = require("sinon")
 
 const { runRouteHandler, beforeHookMongo, afterHookMongo } = require("../../../_utils")
 const User = require("../../../../models/user")
@@ -24,14 +25,21 @@ test.afterEach(async (t) => {
   await User.remove({})
 })
 
-test.serial("my passing test", async (t) => {
+test.serial("Users.find: my passing test", async (t) => {
   const { status, body } = await runRouteHandler(find)
   t.is(status, 200)
   t.is(body.users.length, 5)
 })
 
-test.serial("my second test (may pass or fail!)", async (t) => {
+test.serial("Users.find: my second test (may pass or fail!)", async (t) => {
   const { status, body } = await runRouteHandler(find)
   t.is(status, 200)
   t.is(body.users[0].email, t.context.fixture[0].email.toLowerCase())
+})
+
+test.only("Users.find: If DB ops throw an error, status should be 500", async (t) => {
+  sinon.stub(User, "find").throws(new Error("Dummy DB Error!!"))
+  const { status, body } = await runRouteHandler(find)
+  t.is(status, 500)
+  t.is(body.reason, "Dummy DB Error!!")
 })
