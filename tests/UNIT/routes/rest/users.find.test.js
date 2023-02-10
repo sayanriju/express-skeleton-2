@@ -1,6 +1,5 @@
 /* eslint-disable no-param-reassign */
 const test = require("ava")
-const faker = require("faker")
 const sinon = require("sinon")
 
 const {
