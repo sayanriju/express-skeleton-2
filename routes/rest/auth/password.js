@@ -1,5 +1,5 @@
 const moment = require("moment")
-const cuid = require("cuid")
+const cuid = require("@paralleldrive/cuid2")
 
 const mail = require("../../../lib/mail")
 
