@@ -48,7 +48,7 @@ module.exports = {
         )
       }
       const now = Date.now()
-      const token = cuid.slug()
+      const token = cuid.createId()
       user.forgotpassword = {
         requestedAt: now,
         token,
